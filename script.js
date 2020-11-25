@@ -11,6 +11,7 @@ const elements = {
     randomName: document.querySelector(".random-recipe-footer h3"),
     recipeSection: document.querySelector(".random-recipe-section"),
     inputField: document.querySelector(".search-field"),
+    recipeCard: document.querySelector(".recipe-card"),
 }
 
 /* functions */
@@ -22,10 +23,13 @@ const getRandomRecipe = async () => {
     // console.log(data.meals[0]);
     const img_url = data.meals[0].strMealThumb;
     const sttMeal = data.meals[0].strMeal;
+    const idMeal = data.meals[0].idMeal;
     // set recipe image in DOM
     elements.randomImage.src = img_url
     // set recipe name in DOM
     elements.randomName.textContent = sttMeal;
+    // set recipe id in DOM
+    elements.recipeCard.setAttribute("id", idMeal);
 }
 
 const searchMeal = async (query) => {
@@ -44,7 +48,7 @@ const displaySearch = (data) => {
     let new_markup = '';
     for (let i = 0; i < data.length; i++ ) {
         const markup = `
-            <div class="recipe-card">
+            <div class="recipe-card" id=${data[i].idMeal}>
                 <div class="random-recipe-img-container">
                     <a href="#" >
                         <img src=${data[i].strMealThumb} id="random-recipe-img">
