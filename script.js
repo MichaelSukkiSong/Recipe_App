@@ -12,6 +12,7 @@ const elements = {
     recipeSection: document.querySelector(".random-recipe-section"),
     inputField: document.querySelector(".search-field"),
     recipeCard: document.querySelector(".recipe-card"),
+    likeBtn: document.querySelector(".like-btn"),
 }
 
 /* functions */
@@ -56,7 +57,7 @@ const displaySearch = (data) => {
                 </div>
                 <div class="random-recipe-footer">
                     <h3>${data[i].strMeal}</h3>
-                    <button class="like-btn"><i class="far fa-heart"></i></button>
+                    <button class="like-btn"><i onclick="toggleSearchedRecipeFavFunc(this)" class="far fa-heart"></i></button>
                 </div>
             </div>
             `;
@@ -69,9 +70,30 @@ const clearSearchResult = () => {
     elements.recipeSection.innerHTML = '';
 }
 
+function toggleSearchedRecipeFavFunc(x) {
+    x.classList.toggle("fas");
+    // get recipe id
+    // add recipe id to favorite meals(DB)
+    // add recipe id to favorite meals(UI)
+}
+
+const controlFavorite = () => {
+    // toggle favorite icon
+    console.log(elements.likeBtn.firstElementChild);
+    elements.likeBtn.firstElementChild.classList.toggle("fas");
+
+    // get recipe id
+    // add recipe id to favorite meals(DB)
+    // add recipe id to favorite meals(UI)
+}
+
+/* on load */
+
+window.addEventListener("load", getRandomRecipe)
+
 /* search button */
 
-document.querySelector(".search-form").addEventListener("submit",async (e) => {
+document.querySelector(".search-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     // get query from input
     const input = elements.inputField.value;
@@ -87,6 +109,13 @@ document.querySelector(".search-form").addEventListener("submit",async (e) => {
     displaySearch(searchResult);
 })
 
-/* on load */
+/* favorite button */
 
-window.addEventListener("load", getRandomRecipe)
+// random recipe page
+elements.recipeSection.addEventListener("click", e => {
+    if (e.target.matches(".like-btn, .like-btn *")) {
+        controlFavorite();
+    }
+})
+
+// TODO : 
