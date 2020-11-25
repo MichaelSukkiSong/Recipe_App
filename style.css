@@ -102,3 +102,8 @@ img {
   background-color: #ffffff;
   font-size: 20px;
 }
+
+#random-recipe-img {
+  width: 338px;
+  height: 290px;
+}
