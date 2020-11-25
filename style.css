@@ -24,7 +24,8 @@ img {
 
 .container {
   width: 360px;
-  height: 600px;
+  /* height: 600px; */
+  height: auto;
   margin: 50px auto;
   border: 1px solid black;
   border-radius: 5px;
