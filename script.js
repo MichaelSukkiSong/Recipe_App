@@ -171,10 +171,22 @@ elements.recipeSection.addEventListener("click", e => {
         const randomRecipeID = e.target.parentNode.parentNode.parentNode.id
         // console.log(randomRecipeID);
         
-        // add recipe id to favorites localStorage DB
-        localStorage.setItem(randomRecipeID, randomRecipeID);
+        if (localStorage.hasOwnProperty(randomRecipeID)) {
+            // delete recipe id from favorites localStorage DB
+            localStorage.removeItem(randomRecipeID);
 
-        loadLocalStorageDBToUI();
+            // load localStorage data to UI
+            loadLocalStorageDBToUI();
+
+        } else {
+            // add recipe id to favorites localStorage DB
+            localStorage.setItem(randomRecipeID, randomRecipeID);
+            
+            // load localStorage data to UI
+            loadLocalStorageDBToUI();
+        }
+
     }
 })
 
+// TODO: delete favorites
