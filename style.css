@@ -74,6 +74,12 @@ img {
   margin-top: 5px;
 }
 
+.favorite a img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+}
+
 /* random-recipe-section */
 
 .random-recipe-section {
