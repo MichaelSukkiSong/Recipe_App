@@ -96,7 +96,7 @@ const displayFavorite = (data) => {
             <button class="delete-fav-btn"><i class="fas fa-times-circle"></i></button>
             <a href="#" >
                 <img src=${data[i].strMealThumb} alt="favorite-food-image"></br>
-                <span class="favorite-text">${data[i].strMeal}</span>
+                <span class="favorite-text">${formatName(data[i].strMeal)}</span>
             </a>
         </div>
         `;
@@ -123,6 +123,21 @@ const loadLocalStorageDBToUI = () => {
         })
 }
 
+const formatName = (str, limit=12) => {
+    const newStr = [];
+    if (str.length > limit) {
+        str.split(' ').reduce((acc, cur) => {
+            if (acc + cur.length <= limit) {
+                newStr.push(cur);
+            }
+            return acc + cur.length;
+        },0);
+
+        return `${newStr.join(' ')}..`;
+    }
+    return str;
+}
+
 const clearSearchResult = () => {
     elements.recipeSection.innerHTML = '';
 }
@@ -133,9 +148,6 @@ const clearFavorites = () => {
 
 function toggleSearchedRecipeFavFunc(x) {
     x.classList.toggle("fas");
-    // get recipe id
-    // add recipe id to favorite meals(DB)
-    // add recipe id to favorite meals(UI)
 }
 
 /* on load */
@@ -189,6 +201,8 @@ elements.recipeSection.addEventListener("click", e => {
 
     }
 })
+
+/* delete button (in favorite meals) */
 
 elements.favorites.addEventListener("click", e => {
     if (e.target.matches(".delete-fav-btn, .delete-fav-btn *")) {
