@@ -92,7 +92,7 @@ const displayFavorite = (data) => {
     let new_markup = '';
     for (let i = 0; i < data.length; i++) {
         const markup = `
-        <div class="favorite">
+        <div class="favorite" id=${data[i].idMeal}>
             <button class="delete-fav-btn"><i class="fas fa-times-circle"></i></button>
             <a href="#" >
                 <img src=${data[i].strMealThumb} alt="favorite-food-image"></br>
@@ -190,4 +190,15 @@ elements.recipeSection.addEventListener("click", e => {
     }
 })
 
-//TODO: delete button position
+elements.favorites.addEventListener("click", e => {
+    if (e.target.matches(".delete-fav-btn, .delete-fav-btn *")) {
+        // select recipe ID
+        const mealID = e.target.parentNode.parentNode.id;
+
+        // delete from localStorage
+        localStorage.removeItem(mealID);
+
+        // load localStorage data to UI
+        loadLocalStorageDBToUI();
+    }
+})
