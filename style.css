@@ -72,12 +72,20 @@ img {
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 5px;
+  position: relative;
+  height: 150px;
 }
 
 .favorite a img {
   width: 80px;
   height: 80px;
   border-radius: 100px;
+}
+
+.delete-fav-btn {
+  border: none;
+  position: absolute;
+  left: 70px;
 }
 
 /* random-recipe-section */

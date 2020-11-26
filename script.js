@@ -93,6 +93,7 @@ const displayFavorite = (data) => {
     for (let i = 0; i < data.length; i++) {
         const markup = `
         <div class="favorite">
+            <button class="delete-fav-btn"><i class="fas fa-times-circle"></i></button>
             <a href="#" >
                 <img src=${data[i].strMealThumb} alt="favorite-food-image"></br>
                 <span class="favorite-text">${data[i].strMeal}</span>
@@ -189,4 +190,4 @@ elements.recipeSection.addEventListener("click", e => {
     }
 })
 
-// TODO: delete favorites
+//TODO: delete button position
