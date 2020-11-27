@@ -149,7 +149,7 @@ const displayDetailPage = (data) => {
     elements.detailModalIngredients.insertAdjacentHTML("beforeend", new_markup);
 }
 
-const formatName = (str, limit=12) => {
+const formatName = (str, limit=14) => {
     const newStr = [];
     if (str.length > limit) {
         str.split(' ').reduce((acc, cur) => {

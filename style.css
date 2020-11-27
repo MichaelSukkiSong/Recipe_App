@@ -27,9 +27,8 @@ img {
   /* height: 600px; */
   height: auto;
   margin: 50px auto;
-  border: 1px solid black;
   border-radius: 5px;
-  box-shadow: 5px 10px #ece5e5;
+  box-shadow: 0 0 10px 2px #ece5e5;
 }
 
 /* search form */
@@ -49,13 +48,15 @@ img {
 .search-btn {
   height: 24px;
   width: 24px;
+  /* border: none; */
+  box-shadow: 0 0 10px 2px #ece5e5;
 }
 
 /* favorite-section */
 
 .favorite-section {
   height: 30%;
-  background-color: rgb(235, 197, 235);
+  background-color: rgb(243, 221, 243);
 }
 
 .favorite-section h3 {
@@ -65,29 +66,40 @@ img {
 
 .favorites {
   overflow: hidden;
-  min-height: 130px;
+  min-height: 120px;
   height: auto;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .favorite {
   float: left;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
+  margin-left: 10px;
+  text-align: center;
   position: relative;
-  height: 150px;
+  height: 100px;
 }
 
 .favorite a img {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   border-radius: 100px;
+}
+
+.favorite a span {
+  font-size: 13px;
 }
 
 .delete-fav-btn {
   border: none;
   position: absolute;
-  left: 70px;
+  left: 65px;
+  background-color: transparent;
+}
+
+.delete-fav-btn:hover {
+  font-size: 20px;
+  transition: 1s;
 }
 
 /* random-recipe-section */
@@ -97,8 +109,9 @@ img {
 }
 
 .recipe-card {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 10px 10px 10px 10px;
+  box-shadow: 0 0 10px 2px #ece5e5;
 }
 
 .random-recipe-footer {
