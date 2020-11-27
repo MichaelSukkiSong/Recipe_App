@@ -10,6 +10,7 @@ const elements = {
     randomImage: document.getElementById("random-recipe-img"),
     randomName: document.querySelector(".random-recipe-footer h3"),
     recipeSection: document.querySelector(".random-recipe-section"),
+    recipeImgContainer: document.querySelector(".random-recipe-img-container"),
     inputField: document.querySelector(".search-field"),
     recipeCard: document.querySelector(".recipe-card"),
     likeBtn: document.querySelector(".like-btn"),
@@ -17,6 +18,12 @@ const elements = {
     favorite: document.querySelector(".favorite"),
     favoriteImg: document.querySelector(".favorite > a > img"),
     favoriteName: document.querySelector(".favorite-text"),
+    detailModalContent: document.querySelector(".modal-content"),
+    detailModalTitle: document.querySelector(".modal-content h1"),
+    detailModalImg: document.querySelector(".modal-content img"),
+    detailModalText: document.querySelector(".modal-content p"),
+    detailModalIngredients: document.querySelector(".ingredients"),
+    detailModalIngredient: document.querySelector(".ingredient"),
 }
 
 /* functions */
@@ -123,6 +130,25 @@ const loadLocalStorageDBToUI = () => {
         })
 }
 
+const displayDetailPage = (data) => {
+    console.log(data);
+    elements.detailModalTitle.textContent = data.strMeal;
+    elements.detailModalImg.src = data.strMealThumb;
+    elements.detailModalText.textContent = data.strInstructions;
+    let new_markup;
+    for (let i= 0 ; i <22 ; i++) {
+        const IndIndex =`strIngredient${i+1}`
+        const MeasureIndex = `strMeasure${i+1}`
+        const markup = `
+        <li class="ingredient">
+            ${data[IndIndex]} - ${data[MeasureIndex]}
+        </li>
+        `;
+        new_markup += markup;
+    }
+    elements.detailModalIngredients.insertAdjacentHTML("beforeend", new_markup);
+}
+
 const formatName = (str, limit=12) => {
     const newStr = [];
     if (str.length > limit) {
@@ -150,6 +176,10 @@ function toggleSearchedRecipeFavFunc(x) {
     x.classList.toggle("fas");
 }
 
+const closeModal = () => {
+    document.querySelector(".modal").style.display = "none";
+  };
+
 /* on load */
 
 window.addEventListener("load", getRandomRecipe);
@@ -173,7 +203,7 @@ document.querySelector(".search-form").addEventListener("submit", async (e) => {
     displaySearch(searchResult);
 })
 
-/* favorite button */
+/* favorite button && details button */
 
 elements.recipeSection.addEventListener("click", e => {
     if (e.target.matches(".like-btn, .like-btn *")) {
@@ -199,6 +229,20 @@ elements.recipeSection.addEventListener("click", e => {
             loadLocalStorageDBToUI();
         }
 
+    } else if (e.target.matches("#random-recipe-img")) {
+        // show detail modal
+        document.querySelector(".modal").style.display = "block";
+
+        // get recipe id
+        const randomRecipeID = e.target.parentNode.parentNode.parentNode.id
+        console.log(randomRecipeID);
+
+        // get detail recipe data
+        const detailRecipeData = getRecipeDetailByID(randomRecipeID);
+        // console.log(detailRecipeData);
+        
+        // display detail data in modal UI
+        detailRecipeData.then(data => displayDetailPage(data))
     }
 })
 
@@ -216,3 +260,26 @@ elements.favorites.addEventListener("click", e => {
         loadLocalStorageDBToUI();
     }
 })
+
+
+/* close detail modal */
+// clicking on span tag
+document.querySelector("body").addEventListener("click", e => {
+    if (e.target.matches(".modal-content span")) {
+        closeModal();
+    }
+})
+// clikcing on windows
+window.addEventListener("click", (e) => {
+    if (e.target.matches(".modal")) {
+      closeModal();
+    }
+  });
+// "esc" keydown event
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+  });
+
+//TODO: add detail feature to favorites seciton
