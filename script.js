@@ -249,6 +249,7 @@ elements.recipeSection.addEventListener("click", e => {
 /* delete button (in favorite meals) */
 
 elements.favorites.addEventListener("click", e => {
+    // console.log(e.target);
     if (e.target.matches(".delete-fav-btn, .delete-fav-btn *")) {
         // select recipe ID
         const mealID = e.target.parentNode.parentNode.id;
@@ -258,6 +259,20 @@ elements.favorites.addEventListener("click", e => {
 
         // load localStorage data to UI
         loadLocalStorageDBToUI();
+    } else if (e.target.matches(".favorite, .favorite *")) {
+        // show detail modal
+        document.querySelector(".modal").style.display = "block";
+        
+        // get recipe ID
+        const mealID = e.target.parentNode.parentNode.id;
+        // console.log(mealID)
+
+        // get detail recipe data
+        const detailRecipeData = getRecipeDetailByID(mealID);
+        // console.log(detailRecipeData)
+
+        // display detail data in modal UI
+        detailRecipeData.then(data => displayDetailPage(data))
     }
 })
 
